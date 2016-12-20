@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>The NES Codex - Programming</title>
+    
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script type="text/javascript" src="js/script.js"></script>
+        
+</head>
+
+<body>
+
+	<h1> The NES Codex - Programming </h1>
+	
+	<h2> Basics of NES Operation </h2>
+	<p>
+		The NES, and even modern machines, operate in the same way at the most basic level. Data is read from locations in memory, manipulated, and stored in memory. Nearly every action that a computer does can be expressed in this way. The NES uses a processor based on the MOS 6502, a cheap and popular chip developed in 1975 (See <a href="processor.htm">Processor</a>). The 6502 and its variants have been used in the Atari 2600 (as the MOS 6510), the Commodore 64, Apple II, and even the original Tamagotchi toys. More advanced 16-bit variants were used in both the Apple IIGS, and the NES's successor, the Super Nintento Entertainment System (SNES), released in 1991. Regardless of the machine, slight variants of the same language, 6502 Assembly, was used to operate them. The 6502 utilizes various registers in memory to control hardware (See <a href="memory.htm"> Memory Map</a>), along with 3 special registers outside of memory: the Accumlator (A), X and Y. The Accumlator is designed to hold the results of mathematical operations. X and Y are can hold data as well, but most mathmatical commands use only the Accumlator. By placing specific data in specific locations (or by reading data that has been placed there), the NES does everything from moving sprites, changing colors, and playing audio, to clearing memory, copying data, and checking what buttons you press. Take the following example, which will alter a sprite's attributes (stored at $0200), in such as way as to move the sprite to the center of the screen: <br>
+		<br>
+		(See <a href="opcodes.htm"> 6502 Opcodes</a> for reference)
+	</p>
+	<p class="tech">
+	  LDA #$80          ;Load $80 (128 in decimal) into A. '#' means I am referencing a number, not an address.
+	  STA $0201         ;Store contents of A ($80) at address $0201. This byte determines the sprite's Y position.
+	  STA $0204         ;Store contents of A ($80) at address $0204. Note that storing does not remove the contents of A.
+                            ;This is useful for storing the same value in multiple locations.
+	</p>
+	<p>
+		Here's another example, where we add 8 and 16: <br>
+	</p>
+	<p class="tech">
+	  LDA #$08          ;Load 8 into A.
+	  ADC #$10          ;Add 16 ($10) to the contents of A. A now contains 24 ($18).
+	  STA $3000         ;Store contents of A (24) at address $3000.
+	</p>
+	<p>
+		Though $3000 isn't a useful address on the NES (See <a href="memory.htm">Memory Map</a>), the results of our operation could be stored anywhere. It could be put into a buffer to be written to the screen, or it could be used as the input for yet another calculation. Using loops and conditional statements, you can manipulate vast swathes of memory using relatively few lines of code. For example, here is a code fragment that copies the contents of $6000 to every byte in the NES's RAM, essentially eraseing any data that might be there:
+	</p>
+	<p class="tech">
+	loopstart:          ;A label, referenced by Jump/Branch commands. Think of them as bookmarks in a book.
+	  LDA $6000         ;Loads the contents of $6000 into A. Note the lack of '#', as I am referencing an address, not a number. 
+	  LDX #$FF          ;Loads $FF into X, which will serve as a counter.
+	loop:
+	  INX               ;Increments X every time the loop is run. The very first time, it makes X overflow, turning it from $FF to $00.
+	  STA $0000, X      ;Stores A at $0000, with offset X. For example, if X is 5, then A will be stored at $0000 + 5, or $0005.
+	  STA $0100, X      ;This is repeated in 256 Byte chunks (called "pages"), since there can only be 256 values in 1 byte.
+	  STA $0200, X      ;This seems counterintuitive, though it works.
+	  STA $0300, X      ;$FF is written to $0100, then $0200, and so on.
+	  STA $0400, X      ;When the loop goes around again, $FF is written to $0101, then $0201, and so on.
+	  STA $0500, X      ;Instead of filling each page completely in turn,
+	  STA $0600, X      ;All the pages are filled together, 1 Byte at a time.
+	  STA $0700, X		
+	  CPX #$FF          ;Compares X to $FF (The value we want X to be to end the loop)
+	  BNE loop          ;If X is NOT equal to $FF, go back to 'loop'. If is IS equal to $FF, the code simply carries on.
+	loop_end:
+	  LDA #$00          ;With the loop done, we clear our registers for good measure.
+	  LDX #$00          ;This is outside the loop, and so will only be executed once, after the loop is over.
+	  
+	</p>
+	<h2> See Also: </h2>
+	<a href="index.htm"> Home </a> <br>
+	<a href="processor.htm"> Processor </a> <br>
+	<a href="memory.htm"> Memory Map </a> <br>
+	<a href="audio.htm"> Audio </a> <br>
+	<a href="opcodes.htm"> 6502 Opcodes </a> <br>
+	<br>
+</body>
+
+</html>

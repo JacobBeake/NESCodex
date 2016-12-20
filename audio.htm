@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>The NES Codex - Audio</title>
+    
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script type="text/javascript" src="js/script.js"></script>
+        
+</head>
+
+<body>
+
+	<h1> The NES Codex - Audio </h1>
+	
+	<p>
+		One of the many differences between the Ricoh 2A03 (See <a href="processor.htm">Processor</a>) and the MOS 6502 upon which it is based was the inclusion of an Audio Processing Unit (APU) in the processor itself. Other 6502-based machines often used seperate sound chips, such as the Commodore 64 with its seminal SID 6581 and 8580 chips. The NES, however, featured an APU within the CPU itself, an arrangment unique to 6502-based machines of the day. It was more robust, though less versatile compared to other sound chips of the day, but the NES's distinct, chipper sound endeared it to an entire generation, and its particular aural qualities are often immitated, but rarely duplicated correctly. The Audio Processing Unit (APU) was operated in the same was as the rest of the NES's hardware (See <a href="programming.htm">Programming</a>). By writing values to the APU's registers (See <a href="memory.htm">Memory Map</a>), the various channels could be controlled.
+	</p>
+	<img src="img/audioRegisters.png" alt="Audio register read-out" width="573" height="111">
+	<p class="caption"> A read-out of audio registers, via FamiTracker.</p>
+	<h2> Pulse Channels </h2>
+	<p>
+		The bulk of the NES's unique sound comes from its two Pulse Wave channels. Sometimes incorrectly referred to as Square Channels, these channels can produce pulse waves in a variety of volumes, pitches, and styles. Pulse waves are a particular kind of sound wave, responsible for the distinct "bleeps and bloops" that were the hallmark of games of the era. The NES can produce 4 different wave "duty cycles" or widths: 12.5%, 25%, 50%, and 75%. The percentanges refer to what percentage of on the wave is in the "up" position during one oscillation.
+	</p>
+	<p>
+		The 12.5% wave produces a tinny bleep. Skilled musicians can turn this into the cry of an oboe, or the wail of an electric guitar. The 25% wave is more rounded in sound, like a clarinet or French horn. The 50% wave (the only wave that is actually a square wave) is the most rounded, and, in high pitches, can sound like a flute. The 75% wave, being an inverse of the 25% wave, sounds identical, and it less common, though not unheard of.
+	</p>
+	<p class="tech">
+	 12.5%                 25%                   50%                   75%
+	 __                    ____                  ________              ____________
+	|  |                  |    |                |        |            |            |
+	|  |                  |    |                |        |            |            |
+	|  |______________    |    |____________    |        |________    |            |____
+	</p>
+	<p>
+		The NES had only 3 channels capable of producing tones in any practical sense, meaning full chords were an impracticality. While most Japanese composers simply avoided the problem by using the 2 pulse channels in tandem to create rich harmonies or counter-melodies, European composers used a technique called "arpeggio", a trick many had learned from composing for the Commodore 64 and other systems which shared the same problem. By very rapidly playing the notes of chord individually, it gave the illusion of a full chord, and only used a single channel. The pulse channels, with their versatility, were perfect for the job. Composers such as Tim Follin, Jeroen Tel, and Rob Hubbard used arpeggio and other techniques to push what was possible with the NES's audio hardware.
+	</p>
+	<h2> Triangle Channel </h2>
+	<p>
+		The NES had a single triangle channel, able to produce a triangle wave. Compared to pulse waves, triangle waves are much softer, producing a smooth "doo" sound. Unlike the pulse channel, the triangle channel, had no fine volume control; it could only play either at full volume or not at all. Its smooth sound and ear-splitting whine at high frequencies made triangle waves perfect for low drones and basslines.
+	</p>
+	<p class="tech">
+	 Triangle
+	 
+	    /\      /\      /\      /\
+	   /  \    /  \    /  \    /  \
+	  /    \  /    \  /    \  /    \
+	 /      \/      \/      \/      \
+	</p>
+	<p>
+		The triangle channel did have other uses. Clever composers in both Japan and Europe found that quickly lowering a triangle wave's pitch gave the impression of a tom drum. While Japanese composers used this mainly for emphasis, European composers used this extensively. Skilled musicians could use the channel for both bass and drums, seamlessly blending the two parts. Other composers sometimes used the channel to emulate a flute, such as Rob Hubbard's music in<em>The Immortal</em>. Better still, clever use of the channel could emulate the sounds of bongos, cowbells, and woodblocks.
+	</p>
+	<h2> Noise Channel </h2>
+	<p>
+		The noise channel of the NES produced white noise, like the static of a TV or Radio. Almost always used for percussion, the channel could also simulate a wide variety of sound effects, like footsteps, explosions, gunshots, distant rumbling, the clack of typewriter keys, the sound of ocean surf, the rushing of water, and many others. Most often, however, it was either paired with the triangle or DPCM channels, handling things like high-hats, rim taps, and cymbal crashes, or handled all percussion by itself, as it did in many early NES games.
+	</p>
+	<h2> DPCM Channel </h2>
+	<p>
+		The NES, unlike many other machines of the time, had a dedicated way to play back recorded sounds. While other systems dynamically used white noise and waveforms to approximate a digitized sample, the NES's Delta Pulse Code Modulation (DPCM) channel could play back a sample directly. DPCM is a way of representing an analog sound (like those produced in the natural world) in a digital form, allowing it to be read by a computer. For example, your phone uses DPCM to take your voice and digitize it to be sent down the wire. Though a technological marvel for the time, the DPCM channel was used sparingly, as the NES imposed a 16KB total sample limit, which equated to about 8 seconds of audio. Samples took up valuable space on cartridges, space that could be used for extra levels of graphics. Most games that featured DPCM used them for quick drum samples (typically 1KB or less), such as the thumping kick drum in Konami's <em>Jackal</em>. Rarely, it was used to emulate the human voice, such as the "Fire!" shouted by outlaws in Nintendo's <em>Wild Gunman</em>, or the sinister laugh of Ganon and Bald Bull in <em>Zelda II</em> and <em>Punch-Out!!</em>, respectively. The NES could "pitch down" a sample, lowering its pitch and playback speed, but could not "pitch up". As such, clever developers would make recordings, pitch it up manually, then digitize it, and simply pitch it back down when it was played. The pitched up sample (being far shorter in length) took up only a fraction of the memory, and, when pitched down, would sound natural again.
+    </p>
+	<h2> Sound Drivers </h2>
+	<p>
+		Unlike a modern music suite, the NES did not have a built-in, standardized way to go about making music. The channels accepted absolute frequency, rather than notes on a scale, and the machine itself had no concept of tempo. This forced developers to create their own sound drivers to handle music and sound effects. These drivers were often written by the composers themselves, many of whom were programmers first and musicians second. Memory constraints didn't allow for a universal, standardized sound driver for all NES games, so the drivers were often written specifically for individual games, though there are exceptions. Capcom developed a kind of NES sound engine over the years, hence why their NES games have a such a consistent sound. The <em>Mega Man</em> series, along with <em>Bionic Commando</em>, <em>Little Nemo</em>, <em>Gun.Smoke</em>, and especially Disney-licensed games like <em>DuckTales</em>, <em>The Little Mermaid</em>, <em>Darkwing Duck</em>, and <em>TaleSpin</em> all featured versions of the same sound engine.
+	</p>
+	<h2> See Also: </h2>
+	<a href="index.htm"> Home </a> <br>
+	<a href="processor.htm"> Processor </a> <br>
+	<a href="memory.htm"> Memory Map </a> <br>
+	<a href="programming.htm"> Programming </a> <br>
+	<br>
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>The NES Codex - Video</title>
+    
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script type="text/javascript" src="js/script.js"></script>
+        
+</head>
+
+<body>
+	<h1> The NES Codex - Video </h1>
+	
+	<p>
+		Like its sound, the NES's graphics and art has been held up as the exemplar of the 8-bit era. Many of the conventions that establish this "retro" style come from actual limitations of the NES itself, and developers' clever solutions to circumvent them. The process that takes binary data on a cartridge and converts it into colored bits of light on a television screen is the most complex process in the system's repertoire. This is an abridged explanation of what takes place.
+	</p>
+	<h2> CRT Monitors </h2>
+	<p>
+		Understanding the Picture Processing Unit's operation requires a basic understanding of televisions of the day. Televisions and monitors of the 1980s utilized Cathode Ray Tubes (CRT). Not a new technology by any means, CRTs were demonstrated as early as 1869, and, roughly from the 1930s until the turn of the millenium, CRT was was the preferred method for displaying a video image. Like modern monitors, CRT screens are divided into a 2D grid, made up of pixels (originally called "dots"), and horizontal bands of pixels, called scanlines. Unlike modern monitors, however, the image on the screen is "drawn" scanline by scanline, in a top-to-bottom, left-to-right fashion. CRT Monitors also have a "Vertical Blanking Interval", commonly called a vblank, which is the time after the last scanline of the image has been drawn, but before the first scanline of the next image begins to be drawn. This is to sync the TV with the incoming video signal, and most of the NES's processing occurs during this time, so it is ready to draw the next frame when the vblank ends.
+	</p>
+	<h2> Palettes </h2>
+	<p>
+		To create a colored image, the NES utilized a "master palette" of 54 colors. While TVs of the time did utilize RGB (as they do today), video signals of the time were still analog, and so did not use the distinct numbers to represent RGB values. Instead, the NES utilized colors made available by the telecommunication standards of the time (NTSC in US and Japan, PAL in Europe). A modern RGB approximation of an NTSC NES master palette is seen below:
+	</p>
+	<img src="img/palette.png" width="384" height="95"></img>
+	<p>
+		The NES had 8 palettes (4 for sprites, and 4 for the background, both discussed later), with 3 colors per palette, and 1 "transperency" shared by all palettes. For background palettes, the transperency was the background color of the screen itself (imagine it like the color of the canvas that a painting is painted on). For sprite palettes, the transperency color was never seen, and merely represented a transperent part of the image. Each sprite is colored using 1 of the 4 palettes. For example, consider Mario from <em>Super Mario Bros.</em>:
+	</p>
+	<img src="img/mario.png" width="224" height="128"></img>
+	<p>
+		Importantly, sprite data does not reference the actual colors to be used. Instead, data for each pixel only names which "color slot" in the palette to use, while the data for the sprite references which palette among the 4 to use. (Again, background graphics are achieved in a similar way). This means that you can change which palette a sprite uses, or even change the colors in the palette, all on the fly. This is incredibly versatile, and allows for some chromatic trickery. For example, the coins in <em>Super Mario Bros.</em> are made to "flash" by changing one of their colors from yellow to orange to brown and back again. This is why the "?" blocks flash in unison with the coins; they both share the same palette. When Mario gets a Star, the game rapidly changes his palette, to make him appear to flash with many colors. Likewise, Luigi is merely Mario with different colors; They share the same graphics data, and the only thing that is changed is the palette.
+	</p>
+	<h2> Pattern Tables </h2>
+	<p>
+		As mentioned before, graphical data is represented in way that is indenpendent of the actual colors that the pixels will be, with greatly reduces memory requirements. Sprite and Background graphical data is organized in slightly different ways, though the principle is the same for both. Regardless whether something is a sprite or part of the background, it is stored in the pattern table.
+	</p>
+	<h2> Nametables </h2>
+	<p>
+		While Pattern Tables hold all graphics data, nametables handle the background data being drawn to the screen. Each nametable is a 32x30 grid, with each square representing an 8x8 pixel background tile. Each nametable represents 1 screen's-worth of graphics. The PPU has 4 nametables stored in memory, but the NES has only enough VRAM for 2 nametables. As such, 2 are used, while the other 2 are mirrors of the first 2. Which 2 are chosen to be used can have an effect of screen scrolling (See "Mirroring", discussed later). 
+	</p>
+	<h2> Sprites </h2>
+	<p>
+		Sprites are the defining feature of 2D graphics. They are 2D images comprised of pixels. Typically, "sprite" refers to an entire 2D image (henceforth called a "metasprite"), but the term has a more specific meaning in the context of the NES: it is a 2D image than can move freely about the screen, and is either 8x8 pixels or (rarely) 8x16 pixels. Several sprites may form a metasprite, and be moved and manipulated together, to give the impression of a single object. Each sprite's Object Attribute Memory consists of 4 bytes: Y position, sprite number within the select pattern table, attributes, and X position. The NES can have 256 bytes of OAM, enough for 64 sprites.
+	</p>
+	<p>
+		
+	</p>
+	<h2> See Also: </h2>
+	<a href="index.htm"> Home </a> <br>
+	<a href="processor.htm"> Processor </a> <br>
+	<a href="memory.htm"> Memory Map </a> <br>
+	<a href="audio.htm"> Audio </a> <br>
+	<a href="programming.htm"> Programming </a> <br>
+	<br>
+
+</body>
+
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html><head>
+	<meta charset="utf-8">
+	<title>The NES Codex - Programming</title>
+    
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script type="text/javascript" src="js/script.js"></script>
+        
+</head>
+
+<body>
+	<h1>The NES Codex - Programming</h1>
+    
+    <h2>MOS 6502 Opcodes</h2>
+    
+    <h3>Loading and Storage: </h3>
+    <p class="tech">
+   	LDA - Load into A
+	LDX - Load into X
+	LDY - Load into Y
+	STA - Store contents of A at Address
+	STX - Store contents of X at Address
+	STY - Store contents of Y at Address
+    </p>
+    <h3>Manipulation: </h3>
+    <p class="tech">
+   	TAX - Transfer contents of A to X
+	TXA - Transfer contents of X to A
+	TAY - Transfer contents of A to Y
+	TYA - Transfer contents of Y to A
+	TSX - Transfer Stack Pointer to X
+	TXS - Transfer contents of X to Stack Pointer
+	</p><h3>Mathematics: </h3>
+    <p class="tech">
+   	ADC - Add contents of A and number with carry
+	SBC - Subtract contents of A and number with carry
+	INC - Increment contents of A by 1
+	DEC - Decrement contents of A by 1
+	INX - Increment contents of X by 1 
+	DEX - Decrement contents of X by 1 
+	INY - Increment contents of Y by 1 
+	DEY - Decrement contents of Y by 1
+    </p>
+   	<h3>Bitwise Operations: </h3>
+    <p class="tech">
+	AND - Bitwise AND
+	ORA - Bitwise OR
+	EOR - Bitwise XOR (Exclusive Or)
+	ASL - Arithmetic Shift Left
+	LSR - Logical Shift Right
+	ROL - Rotate Left
+	ROR - Rotate Right
+    </p>
+    <h3>Conditional Operations: </h3>
+    <p class="tech">
+	BEQ - Branch if contents of A are equal to number
+	BNE - Branch if contents of A are not equal to number
+	BPL - Branch on Plus (?)
+	BMI - Branch on Minus (?)
+	BVS - Branch if Overflow Flag is set
+	BVC - Branch if Overflow Flag is cleared
+	BCS - Branch if Carry Flag is set
+	BCC - Branch if Carry Flag is cleared
+    </p>
+	<h3>Comparison Operations: </h3>
+    <p class="tech">
+   	CMP - Compare contents of A with number
+	CPX - Compare contents of X with number
+	CPY - Compare contents of y with number
+	BIT - Compare contents of address with contents of A via Bitwise AND
+    </p>
+    <h3>Jumps and Subroutines: </h3>
+    <p class="tech">
+	JMP - Jump to label
+	JSR - Jump to subroutine (paired with RTS)
+	RTS - Return from subroutine (returns to immediately after JSR)
+    </p>
+    <h3>Flag Operations: </h3>
+    <p class="tech">
+   	SEC - Set Carry Flag
+	CLC - Clear Carry Flag
+	SEI - Set Interrupt Flag
+	CLI - Set Interrupt Flag
+	SED - Set Decimal Mode (Not available on 2A03/2A07)
+	CLD - Clear Decimal Mode
+	CLV - Clear Overflow Flag
+    </p>
+	<h3>Stack Operations: </h3>
+	<p class="tech">
+	PHA - Push contents of A onto Stack
+	PLA - Pull (Pop) contents of A from Stack
+	PHP - Push Processor Status onto Stack
+	PLP - Pull (Pop) Processor Status from Stack
+	</p>
+	<h3>Miscellaneous: </h3>
+	<p class="tech">
+	BRK - Break (Non-Maskable Interrupt)
+	RTI - Return From Interrupt
+	NOP - No Operation
+	</p>
+	
+	<h2> See Also: </h2>
+	<a href="index.htm"> Home </a> <br>
+	<a href="programming.htm"> Programming </a> <br>
+	<br>
+</body>
+
+</html>

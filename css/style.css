@@ -1,0 +1,21 @@
+body {
+	
+	margin-left: 128px;
+	margin-right: 128px;
+
+	
+}
+.caption {
+	
+	font-style: italic;
+	font-size: 10pt;
+	
+}
+
+.tech {
+	
+	white-space: pre;
+	font-family: "Courier New", monospace;
+	font-size: 12pt
+	
+}

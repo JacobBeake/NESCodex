@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>The NES Codex - Processor</title>
+    
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script type="text/javascript" src="js/script.js"></script>
+        
+</head>
+
+<body>
+
+	<h1> The NES Codex - Processor </h1>
+	
+	<p>
+		The NES utilized a custom processor, designed specifically for the system. Though unique, the processor is based around the very popular MOS 6502 chip. This chip, unmodified, appeared in other computers of the era, particularly the Commodore 64 and Apple II, with both machines being programmed in a nearly identical manner to the NES (See <a href="programming.htm">Programming</a>). However, the NES's processor had some differences and quirks that made it more suited to being a gaming machine, rather than an all-purpose computer.
+	</p>
+	
+	<p>
+		The NES's processor is the 2A03, a custom microprocessor designed by Ricoh. (Ricoh would also design the 5A22, the CPU of the NES's successor, also based on MOS technology). It is also known by its part designation, RP2A03. The 2A03 differed from the stock MOS 6502 in a number of ways:
+	</p>
+	<p>
+		- Most notably, the 2A03 had its own Audio Processing Unit (APU) within the processor itself (See <a href="audio.htm">Audio</a>). Most other 6502-based systems had seperate sound chips entirely, if at all. As such, the 2A03 has 2 pins for audio output (1 for Pulse, and 1 for Triangle, Noise, and DPCM) 
+	</p>
+	<p>
+		- The 2A03 lacked a binary-coded decimal (BCD) mode. In short, numbers in machine code could not be expressed in base 10, though the 2A03 retained binary, octal, and hexadecimal modes.
+	</p>
+	<p>
+		- The 2A03 had hardware registers in memory specific to gaming-related functions, such as checking controller input and handling the hitting of the reset button (See <a href="memory.htm">Memory Map</a>). The stock 6502, being mainly designed for home computers, lacked these registers.
+	</p>
+	<p>
+		- The 2A03 interfaced with the "10NES" chip, which would check cartridge hardware to prevent the playing of non-licensed or bootleg games, or games from regions other than the region the machine was designed for. It did work, though it would sometimes fail to validate legitimate games, leading to the common "flashing grey screen" issue. Later hardware revisions to the NES itself removed this chip entirely.
+	</p>
+	<p>
+		- The 2A03 could utilize "illegal" opcodes, commands that, though functional, were not intended for use, and not listed in official documentation. In practice, however, illegal opcodes were rarely used.
+	</p>
+	<br>
+	<p>
+		The 2A03 had four minor hardware revisions over the lifespan of the NES, along with the original version. They were the RP2A03E, RP2A03F, RP2A03G, and RP2A03H. Though each had slight improvements, no major changes were made, to maintain compatibility across all NES's.
+	</p>
+	<h2> See Also: </h2>
+	<a href="index.htm"> Home </a> <br>
+	<a href="memory.htm"> Memory Map </a> <br>
+	<a href="video.htm"> Video </a> <br>
+	<a href="audio.htm"> Audio </a> <br>
+	<a href="programming.htm"> Programming </a> <br>
+	<br>
+
+</body>
+
+</html>

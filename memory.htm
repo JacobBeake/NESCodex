@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html><head>
+	<meta charset="utf-8">
+	<title>The NES Codex - Memory Map</title>
+    
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script type="text/javascript" src="js/script.js"></script>
+        
+</head>
+
+<body>
+
+	<h1> The NES Codex - Memory Map </h1>
+
+	<h2> CPU Memory Map </h2>
+	<p class="tech">
+		$0000 - $00FF: Zero Page RAM (256 Bytes - Can be implicitly accessed more quickly and with less memory)
+		$0100 - $07FF: RAM (1,792 Bytes - 2KB total internal RAM)
+		$0800 - $1FFF: Mirrors of $0000 - $07FF (6KB - Mirrored memory has no practical use, and is usually ignored)
+		$2000: PPU Control (1 Byte - NMI Enable, See <a href="video.htm">Video</a>)
+		$2001: PPU Mask (1 Byte - Color Emphasis, Sprite/Background Enabling, Greyscale)
+		$2002: PPU Status (1 Byte - Vertical Blank Flag, Sprite 0 Hit, Sprite Overflow Flag)
+		$2003: OAM Address (1 Byte - The Read/Write Address where Sprite Data can be found)
+		$2004: OAM Data (1 Byte - Sprite Data to be handled this frame)
+		$2005: Fine Scrolling Control (1 Byte - Written to twice: once for X, once for Y)
+		$2006: PPU Address (1 Byte - PPU Read/Write Address)
+		$2007: PPU Data (1 Byte - PPU Data to Read/Write this frame)
+		$2008 - $3FFF: Mirrors of $2000 - $2007 (~8KB)
+		$4000 - $4003: Pulse 1 Registers (4 Bytes - See <a href="audio.htm">Audio</a>)
+		$4004 - $4007: Pulse 2 Registers (4 Bytes)
+		$4008 - $400B: Triangle Registers (4 Bytes)
+		$400C - $400F: Noise Registers (4 Bytes)
+		$4010 - $4013: DPCM Registers (4 Bytes)
+		$4014: OAM Direct Memory Access (1 Byte - Copies 256 Bytes from given range and writes it to $2004)
+		$4015: Sound Channels Enable/Disable (1 Byte)
+		$4016: Gamepad 1 Input/Gamepad strobe (1 Byte)
+		$4017: Gamepad 2 Input/APU Frame Counter Control (1 Byte)
+		$4018 - $401F: CPU Test Mode Functionality (8 Bytes)
+		$4020 - $FFF9: ROM (~48KB - Expanable through cartridge hardware)
+		$FFFA - $FFFB: Non-Maskable Interrupt Vector (2 Bytes)
+		$FFFC - $FFFD: Reset Vector (2 Bytes - Sets what to do if Reset Button is pressed)
+		$FFFE - $FFFF: Interrupt Request/Break Vector (2 Bytes)
+	</p>
+	
+	<h2> PPU Memory Map </h2>
+	<p class="tech">
+		$0000 - $0FFF: Pattern Table 0 (4KB - Sprite/Graphic Data. See <a href="video.htm">Video</a>)
+		$1000 - $1FFF: Pattern Table 1 (4KB)
+		$2000 - $23FF: Nametable 0 (1KB - Data representing what tiles go where; Enough for exactly one screen-worth)
+		$2400 - $27FF: Nametable 1 (1KB - May be offscreen data, or a "mirror". See <a href="video.htm">Video</a>)
+		$2800 - $2BFF: Nametable 2 (1KB)
+		$2C00 - $2FFF: Nametable 3 (1KB)
+		$3000 - $3EFF: Mirror of $2000 - $2EFF (3.75KB)
+		$3F00 - $3F1F: Palette RAM Indices (32 Bytes)
+		$3F20 - $3FFF: Mirrors of $3F00 - $3F1F (224 Bytes)
+	</p>
+
+	<h2> See Also: </h2>
+	<a href="index.htm">Home </a> <br>
+	<a href="processor.htm">Processor </a> <br>
+	<br>
+</body>
+
+</html>
